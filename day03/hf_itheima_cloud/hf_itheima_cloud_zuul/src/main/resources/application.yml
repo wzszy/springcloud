@@ -1,0 +1,42 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: hf-itheima-cloud-zuul   #为这个服务取名，非常重要！！！！！
+
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://eureka01:7001/eureka/,http://eureka02:7002/eureka/,http://eureka03:7003/eureka/
+      defaultZone: http://eureka01:7001/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    instance-id: zuul.com
+    prefer-ip-address: true
+
+# 配置网关的路由规则
+zuul:
+  ignored-services: "hf-itheima-cloud-*"    # 屏蔽所有与的原始请求的url
+#  ignored-services: "*"    # 屏蔽所有与的原始请求的url
+  routes:
+    dept.serviceId: hf-itheima-cloud-provider     # Eureka中 服务的实例名称
+    dept.path: /dept/**           # 前端请求的 url
+  prefix: /api
+#    cart.serviceId: hf-itheima-cloud-cart-provider     # Eureka中 服务的实例名称
+#    cart.path: /cart/**
+
+ribbon:
+  eureka:
+    enabled: false
+
+hf-itheima-cloud-provider:
+  ribbon:
+    listOfServers: http://localhost:8001/,http://localhost:8002/,http://localhost:8003/,
+
+info:
+  app.name: hf-itheima-cloud-zuul-gateway
+  company.name: www.itheima.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$

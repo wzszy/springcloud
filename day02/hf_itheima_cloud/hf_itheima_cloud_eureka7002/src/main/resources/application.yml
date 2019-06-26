@@ -1,0 +1,15 @@
+server:
+  port: 7002
+
+eureka:
+  instance:
+#    hostname: 127.0.0.1 | www.itheima.com
+    hostname: eureka02
+  server:
+    enable-self-preservation: false  # 开发阶段false可以， 正式环境中建议启用自我保护模式
+  client:
+    register-with-eureka: false    # 不向服务端注册当前的服务
+    fetch-registry: false           # server 端不需要获取对应的服务信息
+    service-url:
+      defaultZone:   http://eureka01:7001/eureka/,http://eureka03:7003/eureka/    #设置eureka server的交互地址，即对外暴露的地址
+#      defaultZone:  http://${eureka.instance.hostname}:${server.port}/eureka/    #设置eureka server的交互地址，即对外暴露的地址

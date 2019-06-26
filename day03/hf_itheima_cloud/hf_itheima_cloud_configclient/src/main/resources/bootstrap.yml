@@ -1,0 +1,15 @@
+eureka:
+  client:
+    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址
+      defaultZone: http://eureka01:7001/eureka/
+
+spring:
+  cloud:
+    config:
+      name: application   #需要从github上读取的资源名称，注意没有yml后缀名
+      profile: dev   #本次访问的配置项
+      label: master
+#      uri: http:/localhost:7777  #本微服务启动后先去找7777号服务，通过SpringCloudConfig获取Gitee的服务地址
+      discovery:
+        enabled: true #启用发现服务功能
+        service-id: hf-itheima-cloud-configserver #指定服务名称

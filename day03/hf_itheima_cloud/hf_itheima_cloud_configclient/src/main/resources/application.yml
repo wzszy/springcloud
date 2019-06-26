@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: hf-itheima-cloud-configclient
+
+server:
+  port: 9090
+
+management:
+  security:
+    enabled: false #是否开启actuator安全认证
